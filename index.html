@@ -1,1 +1,100 @@
-<h1>Hello Piyush</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Face Finder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    .upload-section, .result-section, .login-section, .ad-section {
+      margin-top: 30px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: inline-block;
+      width: 90%;
+      max-width: 500px;
+    }
+    input[type="file"] {
+      padding: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+    }
+    #match-result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔍 Face Finder</h1>
+  <p>Find visually similar Instagram profiles (Demo Version)</p>
+
+  <div class="login-section">
+    <button onclick="loginWithGoogle()">🔐 Login with Gmail</button>
+  </div>
+
+  <div class="upload-section">
+    <h3>📸 Upload a face image</h3>
+    <input type="file" id="imageUpload" accept="image/*" />
+  </div>
+
+  <div class="ad-section">
+    <button onclick="showAdAndUnlock()">📺 Watch Ad to Unlock Match</button>
+  </div>
+
+  <div class="result-section">
+    <div id="match-result">👤 No match yet</div>
+  </div>
+
+  <!-- Firebase SDK for Auth -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-auth-compat.js"></script>
+
+  <script>
+    // 🔧 Replace with your Firebase config
+    const firebaseConfig = {
+      apiKey: "YOUR-API-KEY",
+      authDomain: "YOUR-PROJECT.firebaseapp.com",
+      projectId: "YOUR-PROJECT-ID",
+      appId: "YOUR-APP-ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function loginWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then((result) => {
+          alert("Welcome " + result.user.displayName);
+        })
+        .catch((error) => {
+          console.error("Login error", error);
+        });
+    }
+
+    function showAdAndUnlock() {
+      alert("🎬 Fake ad playing... Please wait 5 seconds...");
+      setTimeout(() => {
+        document.getElementById('match-result').innerText = "🎉 Match found: @sample_profile123";
+      }, 5000);
+    }
+  </script>
+
+</body>
+</html>
