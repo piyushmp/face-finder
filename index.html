@@ -40,7 +40,25 @@
   </style>
 </head>
 <body>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAhrB8H5Qj1cwzcSsgG88cajSyIE50jZPo",
+    authDomain: "facefinder-87329.firebaseapp.com",
+    projectId: "facefinder-87329",
+    storageBucket: "facefinder-87329.firebasestorage.app",
+    messagingSenderId: "35331542725",
+    appId: "1:35331542725:web:8815b42c4659638a04eaac"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
   <h1>🔍 Face Finder</h1>
   <p>Find visually similar Instagram profiles (Demo Version)</p>
 
