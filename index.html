@@ -80,20 +80,10 @@
   </div>
 
   <!-- Firebase SDK for Auth -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-auth-compat.js"></script>
+  
 
   <script>
-    // 🔧 Replace with your Firebase config
-    const firebaseConfig = {
-      apiKey: "YOUR-API-KEY",
-      authDomain: "YOUR-PROJECT.firebaseapp.com",
-      projectId: "YOUR-PROJECT-ID",
-      appId: "YOUR-APP-ID"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+    
 
     function loginWithGoogle() {
       const provider = new firebase.auth.GoogleAuthProvider();
