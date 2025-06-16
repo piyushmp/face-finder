@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -11,9 +11,7 @@
       text-align: center;
       padding: 20px;
     }
-    h1 {
-      color: #333;
-    }
+    h1 { color: #333; }
     .upload-section, .result-section, .login-section, .ad-section {
       margin-top: 30px;
       padding: 20px;
@@ -24,9 +22,7 @@
       width: 90%;
       max-width: 500px;
     }
-    input[type="file"] {
-      padding: 10px;
-    }
+    input[type="file"] { padding: 10px; }
     button {
       padding: 10px 20px;
       font-size: 16px;
@@ -40,25 +36,7 @@
   </style>
 </head>
 <body>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyAhrB8H5Qj1cwzcSsgG88cajSyIE50jZPo",
-    authDomain: "facefinder-87329.firebaseapp.com",
-    projectId: "facefinder-87329",
-    storageBucket: "facefinder-87329.firebasestorage.app",
-    messagingSenderId: "35331542725",
-    appId: "1:35331542725:web:8815b42c4659638a04eaac"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-</script>
   <h1>🔍 Face Finder</h1>
   <p>Find visually similar Instagram profiles (Demo Version)</p>
 
@@ -79,29 +57,44 @@
     <div id="match-result">👤 No match yet</div>
   </div>
 
-  <!-- Firebase SDK for Auth -->
-  
+  <!-- Firebase Modular SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
-  <script>
-    
+    const firebaseConfig = {
+      apiKey: "AIzaSyAhrB8H5Qj1cwzcSsgG88cajSyIE50jZPo",
+      authDomain: "facefinder-87329.firebaseapp.com",
+      projectId: "facefinder-87329",
+      storageBucket: "facefinder-87329.appspot.com",
+      messagingSenderId: "35331542725",
+      appId: "1:35331542725:web:8815b42c4659638a04eaac"
+    };
 
-    function loginWithGoogle() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider)
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // 👇 Make these available globally
+    window.loginWithGoogle = function () {
+      signInWithPopup(auth, provider)
         .then((result) => {
-          alert("Welcome " + result.user.displayName);
+          const user = result.user;
+          alert("Login Success! Welcome " + user.displayName);
+          console.log(user);
         })
         .catch((error) => {
-          console.error("Login error", error);
+          console.error("Login Error:", error);
+          alert("Login Failed: " + error.message);
         });
-    }
+    };
 
-    function showAdAndUnlock() {
+    window.showAdAndUnlock = function () {
       alert("🎬 Fake ad playing... Please wait 5 seconds...");
       setTimeout(() => {
         document.getElementById('match-result').innerText = "🎉 Match found: @sample_profile123";
       }, 5000);
-    }
+    };
   </script>
 
 </body>
